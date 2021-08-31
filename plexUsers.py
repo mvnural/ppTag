@@ -4,6 +4,7 @@
 
 import requests
 import http.client
+import ssl
 import xmltodict
 import json
 import urllib
@@ -36,14 +37,14 @@ class plexUsers():
 
     def fetchPlexApi(self, path='', method='GET', getFormPlextv=False, token=ppTagConfig.PLEX_TOKEN, params=None):
         """a helper function that fetches data from and put data to the plex server"""
-        headers = {'X-Plex-Token': token,
-                'Accept': 'application/json'}
+        headers = {'X-Plex-Token': token, 'Accept': 'application/json'}
+        # headers = {'X-Plex-Token': token}
         if getFormPlextv:
             url = 'plex.tv'
             connection = http.client.HTTPSConnection(url)
         else:
-            url = ppTagConfig.PLEX_URL.rstrip('/').replace('http://','')
-            connection = http.client.HTTPConnection(url)
+            url = ppTagConfig.PLEX_URL.rstrip('/').replace('http://','').replace('https://','')
+            connection = http.client.HTTPSConnection(url, context=ssl._create_unverified_context())
 
         try:
             if method.upper() == 'GET':

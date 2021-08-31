@@ -82,7 +82,8 @@ def createSmartAlbum(title, tagOrSets=None, rating=0):
     else:
         return
     #for section in p.photoSections:
-    metadata = p.fetchPlexApi("/library/sections/" + section + "/tag?type=13&includeExternalMedia=1")
+    # metadata = p.fetchPlexApi("/library/sections/" + section + "/tag?type=13&includeExternalMedia=1")
+    metadata = p.fetchPlexApi("/library/sections/9/tag?type=13&includeExternalMedia=1")
     tags.extend(metadata["MediaContainer"]["Directory"])
 
     tagQuery = ""
@@ -271,7 +272,9 @@ def fetchAndProcessByDate():
         #print('loop through all, started %i' % int(time.time()))
         while toDo:
             if len(p.photoSections):
-                url = "/library/sections/" + p.photoSections[0] + "/all?originallyAvailableAt%3E=" + str(fromTimecode) + "&originallyAvailableAt%3C=" + str(toTimecode) + "&X-Plex-Container-Start=%i&X-Plex-Container-Size=%i" % (start, size)
+                print (p.photoSections)
+                # url = "/library/sections/" + p.photoSections[0] + "/all?originallyAvailableAt%3E=" + str(fromTimecode) + "&originallyAvailableAt%3C=" + str(toTimecode) + "&X-Plex-Container-Start=%i&X-Plex-Container-Size=%i" % (start, size)
+                url = "/library/sections/9/all?originallyAvailableAt%3E=" + str(fromTimecode) + "&originallyAvailableAt%3C=" + str(toTimecode) + "&X-Plex-Container-Start=%i&X-Plex-Container-Size=%i" % (start, size)
                 metadata = p.fetchPlexApi(url)
                 container = metadata["MediaContainer"]
                 elements = container["Metadata"]
@@ -324,7 +327,8 @@ def loopThroughAllPhotos():
     #print('loop through all, started %i' % int(time.time()))
     while toDo:
         if len(p.photoSections):
-            url = "/library/sections/" + p.photoSections[0] + "/all?clusterZoomLevel=1&X-Plex-Container-Start=%i&X-Plex-Container-Size=%i" % (start, size)
+            # url = "/library/sections/" + p.photoSections[0] + "/all?clusterZoomLevel=1&X-Plex-Container-Start=%i&X-Plex-Container-Size=%i" % (start, size)
+            url = "/library/sections/9/all?clusterZoomLevel=1&X-Plex-Container-Start=%i&X-Plex-Container-Size=%i" % (start, size)
             metadata = p.fetchPlexApi(url)
             container = metadata["MediaContainer"]
             elements = container["Metadata"]

@@ -119,7 +119,7 @@ class plexUsers():
 
         session = requests.Session()
         session.verify = False
-        self.plex = PlexServer(ppTagConfig.PLEX_URL, ppTagConfig.PLEX_TOKEN)
+        self.plex = PlexServer(ppTagConfig.PLEX_URL, ppTagConfig.PLEX_TOKEN,session)
 
 
         apiUsers = self.fetchPlexApi("/api/home/users","GET",True)

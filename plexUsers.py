@@ -2,6 +2,7 @@
 # pip install plexapi
 # pip install xmltodict
 
+import requests
 import http.client
 import xmltodict
 import json
@@ -116,6 +117,8 @@ class plexUsers():
         # creating the client id
         self.clientId = uuid3(NAMESPACE_URL, "pptag").hex
 
+        session = requests.Session()
+        session.verify = False
         self.plex = PlexServer(ppTagConfig.PLEX_URL, ppTagConfig.PLEX_TOKEN)
 
 
